@@ -4,19 +4,30 @@ name    "My ActiveRecord Baseline"
 summary "A baseline repository for ActiveRecord apps"
 version "0.1.0"
 
-help   "Run the interactive console"
+help    "Run the interactive console"
+example "c"
 action :console, :c do
   run 'bin/console'
 end
 
-help   "Run database migrations"
+usage   "ap COMMAND"
+help    "Awesome-Print something"
+example "ap User.first"
+action :ap do |args|
+  run %Q[ruby -r./lib/boot.rb -e "ap #{args['COMMAND']}"]
+end
+
+
+help    "Run database migrations"
+example "migrate"
 action :migrate do
   ActiveRecord::Migrator.migrate('db/migrate', ENV["VERSION"] ? ENV["VERSION"].to_i : nil)
   say "Database migrated"
 end
 
-usage  "(generate|g) NAME"
-help   "Generate a new migration file"
+usage   "(generate|g) NAME"
+help    "Generate a new migration file"
+example "g add_last_name_to_user"
 action :generate, :g do |args|
   name = args['NAME']
   timestamp = Time.now.strftime "%Y%m%d%H%M%S"
