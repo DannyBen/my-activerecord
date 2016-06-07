@@ -10,7 +10,9 @@ In the Box
 - Runfile
 - ActiveRecord
 - SQLite
-- Contectual IRB Console
+- Contextual IRB Console
+- DB Migrations
+- Migration Generator
 
 
 Usage

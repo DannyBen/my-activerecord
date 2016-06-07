@@ -4,9 +4,21 @@ name    "My ActiveRecord Baseline"
 summary "A baseline repository for ActiveRecord apps"
 version "0.1.0"
 
-command 'db'
-
 help   "Run database migrations"
 action :migrate do
   ActiveRecord::Migrator.migrate('db/migrate', ENV["VERSION"] ? ENV["VERSION"].to_i : nil)
+  say "Database migrated"
+end
+
+usage  "(generate|g) NAME"
+help   "Generate a new migration file"
+action :generate, :g do |args|
+  name = args['NAME']
+  timestamp = Time.now.strftime "%Y%m%d%H%M%S"
+  path = "db/migrate/#{timestamp}_#{name}.rb"
+  migration_class = name.split("_").map(&:capitalize).join
+  migration = "class #{migration_class} < ActiveRecord::Migration\n  def self.change\n  end\nend"
+
+  File.write path, migration
+  say "Migration #{path} created"
 end
