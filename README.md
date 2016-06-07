@@ -7,7 +7,7 @@ A baseline for developing Ruby apps with ActiveRecord, without Rails.
 In the Box
 --------------------------------------------------
 
-- Runfile
+- [Runfile]
 - ActiveRecord
 - SQLite
 - Contextual IRB Console
@@ -23,3 +23,7 @@ Usage
 - Run `run db migrate`
 - Run `run --help` for more commands
 
+
+---
+
+[Runfile]: https://github.com/DannyBen/runfile
