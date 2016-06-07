@@ -4,6 +4,11 @@ name    "My ActiveRecord Baseline"
 summary "A baseline repository for ActiveRecord apps"
 version "0.1.0"
 
+help   "Run the interactive console"
+action :console, :c do
+  run 'bin/console'
+end
+
 help   "Run database migrations"
 action :migrate do
   ActiveRecord::Migrator.migrate('db/migrate', ENV["VERSION"] ? ENV["VERSION"].to_i : nil)
