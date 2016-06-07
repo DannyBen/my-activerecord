@@ -17,7 +17,7 @@ action :generate, :g do |args|
   timestamp = Time.now.strftime "%Y%m%d%H%M%S"
   path = "db/migrate/#{timestamp}_#{name}.rb"
   migration_class = name.split("_").map(&:capitalize).join
-  migration = "class #{migration_class} < ActiveRecord::Migration\n  def self.change\n  end\nend"
+  migration = "class #{migration_class} < ActiveRecord::Migration\n  def change\n  end\nend"
 
   File.write path, migration
   say "Migration #{path} created"

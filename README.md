@@ -1,7 +1,7 @@
 My ActiveRecord Baseline
 ==================================================
 
-This is a baseline for developing Ruby apps with ActiveRecord without Rails.
+A baseline for developing Ruby apps with ActiveRecord, without Rails.
 
 
 In the Box
