@@ -17,14 +17,6 @@ action :ap do |args|
   run %Q[ruby -r./lib/boot.rb -e "ap #{args['COMMAND']}"]
 end
 
-
-help    "Run database migrations"
-example "migrate"
-action :migrate do
-  ActiveRecord::Migrator.migrate('db/migrate', ENV["VERSION"] ? ENV["VERSION"].to_i : nil)
-  say "Database migrated"
-end
-
 usage   "(generate|g) NAME"
 help    "Generate a new migration file"
 example "g add_last_name_to_user"
@@ -38,3 +30,40 @@ action :generate, :g do |args|
   File.write path, migration
   say "Migration #{path} created"
 end
+
+
+command "db"
+
+help    "Run database migrations"
+action :migrate do
+  ActiveRecord::Migrator.migrate('db/migrate', ENV["VERSION"] ? ENV["VERSION"].to_i : nil)
+  say "Database migrated"
+end
+
+help   "Generate a schema file that can be used as a base migration"
+action :schema do
+  require 'active_record/schema_dumper'
+  filename = "db/schema.rb"
+  File.open(filename, "w:utf-8") do |file|
+    ActiveRecord::SchemaDumper.dump(ActiveRecord::Base.connection, file)
+  end
+  say "db/schema.rb generated"
+end
+
+usage   "seed [TABLE] [LIMIT]"
+help    "Load selected table to the database. Run without parameters to see a list of tables."
+example "seed foods 100"
+action :seed do |args|
+  table = args['TABLE'] || 'list'
+  Loader.new.run table, args['LIMIT'].to_i
+end
+
+
+command "log"
+
+help   "Clean log/*.log"
+action :clean do
+  # Need to run this outside of ruby, otherwise log files are busy
+  run! "rm log/*.log"
+end
+
