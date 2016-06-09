@@ -15,6 +15,7 @@ require_all "#{dir}/lib/**/*.rb"
 # Configure ActiveRecord
 configuration = YAML::load(IO.read('config/database.yml'))
 ActiveRecord::Base.logger = Logger.new('log/active_record.log')
+ActiveRecord::Base.logger.level = :info
 ActiveRecord::Base.establish_connection(configuration['development'])
 ActiveSupport::LogSubscriber.colorize_logging = false
 
