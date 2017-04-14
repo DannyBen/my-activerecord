@@ -65,3 +65,4 @@ action :clean do
   run! "rm log/*.log"
 end
 
+endcommand

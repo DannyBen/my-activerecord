@@ -19,3 +19,7 @@ ActiveRecord::Base.logger.level = :info
 ActiveRecord::Base.establish_connection(configuration['development'])
 ActiveSupport::LogSubscriber.colorize_logging = false
 
+# To connect to a different database at Runtime, use something like this:
+# conn_config = ActiveRecord::Base.connection_config
+# conn_config[:database] = 'db/new_db_name.sqlite3'
+# ActiveRecord::Base.establish_connection conn_config
