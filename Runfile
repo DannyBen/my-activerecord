@@ -1,6 +1,6 @@
 require './lib/boot'
 
-name    "My ActiveRecord Baseline"
+title   "My ActiveRecord Baseline"
 summary "A baseline repository for ActiveRecord apps"
 version "0.1.0"
 
